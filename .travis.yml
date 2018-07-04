@@ -24,4 +24,4 @@ before_install:
 install:
   - if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
 
-#script: vendor/bin/phpunit
+script: vendor/bin/phpunit

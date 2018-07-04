@@ -63,6 +63,11 @@ class Client
         return $this->serverIp[mt_rand(0, count($this->serverIp) - 1)];
     }
 
+    public function getServers()
+    {
+        return $this->serverIp;
+    }
+
     private function getSign($tenant, $group, $timeStamp)
     {
         if ($group) {
@@ -116,7 +121,7 @@ class Client
         if ($method == "GET") {
             $spec = strpos($api, "?") === false ? "?" : "&";
             $ret  =
-                $this->request->get(sprintf("http://%s/%s%s%s", $server, $api,$spec, http_build_query($params)));
+                $this->request->get(sprintf("http://%s/%s%s%s", $server, $api, $spec, http_build_query($params)));
         } else {
             $ret =
                 $this->request->post(sprintf("http://%s/%s", $server, $api), $params);
