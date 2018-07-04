@@ -1,0 +1,24 @@
+{
+  "name": "verystar/aliyun-acm",
+  "description": "The aliyun ACM SDK for php",
+  "keywords": [
+    "aliyun",
+    "acm",
+    "verystar"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Xudong Cai",
+      "email": "xudong.cai@verystar.cn"
+    }
+  ],
+  "require": {
+    "php": ">=5.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Aliyun\\": "src/Aliyun"
+    }
+  }
+}
