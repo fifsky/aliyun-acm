@@ -57,7 +57,7 @@ $ret = $client->delete("test","DEFAULT_GROUP");
 print_r($ret);
 
 //get all config by tenant
-$ret = $client->getAllConfig(1,1);
+$ret = $client->getAllConfigs(1,1);
 print_r($ret);
 ```
 
