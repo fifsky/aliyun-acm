@@ -1,4 +1,11 @@
-# aliyun-acm
+# Aliyun-acm SDK for PHP
+
+<p align="center">
+<a href="https://travis-ci.org/verystar/aliyun-acm"><img src="https://api.travis-ci.org/verystar/aliyun-acm.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/verystar/aliyun-acm"><img src="https://poser.pugx.org/verystar/aliyun-acm/d/total.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/verystar/aliyun-acm"><img src="https://poser.pugx.org/verystar/aliyun-acm/v/stable.svg" alt="Latest Stable Version"></a>
+</p>
+
 Aliyun ACM SDK for PHP, Multi-ip polling and local file cache is supported
 
 ## Install
@@ -43,17 +50,17 @@ $ret = $client->subscribe("test","DEFAULT_GROUP");
 print_r($ret);
 
 //pulish
-//$ret = $client->publish("test","DEFAULT_GROUP","config content");
-//print_r($ret);
+$ret = $client->publish("test","DEFAULT_GROUP","config content");
+print_r($ret);
 
 
 //remove config
-//$ret = $client->delete("test","DEFAULT_GROUP");
-//print_r($ret);
+$ret = $client->delete("test","DEFAULT_GROUP");
+print_r($ret);
 
 //get all config by tenant
-//$ret = $client->getAllConfig(1,1);
-//print_r($ret);
+$ret = $client->getAllConfig(1,1);
+print_r($ret);
 ```
 
 ## Exception
