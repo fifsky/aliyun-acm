@@ -68,20 +68,10 @@ class Client
         return $this->serverIp;
     }
 
-    private function getSign($tenant, $group, $timeStamp)
+    private function getSign($params)
     {
-        if ($group) {
-            $signStr = $tenant."+".$group."+".$timeStamp;
-        } else {
-            $signStr = $tenant."+".$timeStamp;
-        }
-
+        $signStr = implode("+", $params);
         return base64_encode(hash_hmac('sha1', $signStr, $this->secretKey, true));
-    }
-
-    private function getSubscribeSign($probe)
-    {
-        return base64_encode(hash_hmac('sha1', $probe, $this->secretKey, true));
     }
 
     /**
@@ -107,14 +97,13 @@ class Client
         ];
 
         if (isset($params["Probe-Modify-Request"])) {
-            $header[] = "Spas-Signature:".$this->getSubscribeSign($params["Probe-Modify-Request"]);
+            $header[] = "Spas-Signature:".$this->getSign([$params["Probe-Modify-Request"]]);
             $header[] = "longPullingTimeout:".$this->timeOut * 1000;
             //http timeout > long pull timeout
             $this->request->setTimeout($this->timeOut + 30);
         } else {
-            $params["tenant"] = $this->nameSpace;
-            $group            = isset($params["group"]) ? $params["group"] : "";
-            $header[]         = "Spas-Signature:".$this->getSign($this->nameSpace, $group, $timeStamp);
+            $group    = isset($params["group"]) ? $params["group"] : "";
+            $header[] = "Spas-Signature:".$this->getSign([$this->nameSpace, $group, $timeStamp]);
         }
 
         $this->request->setHeader($header);
@@ -148,6 +137,7 @@ class Client
     public function getConfig($dataId, $group = "DEFAULT_GROUP")
     {
         return $this->callApi("diamond-server/config.co", [
+            "tenant" => $this->nameSpace,
             "dataId" => $dataId,
             "group"  => $group,
         ]);
@@ -179,6 +169,7 @@ class Client
     public function publish($dataId, $group, $content)
     {
         return $this->callApi("diamond-server/basestone.do?method=syncUpdateAll", [
+            "tenant"  => $this->nameSpace,
             "dataId"  => $dataId,
             "group"   => $group,
             "content" => Str::toGBK($content),
@@ -227,6 +218,7 @@ class Client
     public function delete($dataId, $group)
     {
         return $this->callApi("diamond-server/datum.do?method=deleteAllDatums", [
+            "tenant" => $this->nameSpace,
             "dataId" => $dataId,
             "group"  => $group,
         ], "POST");

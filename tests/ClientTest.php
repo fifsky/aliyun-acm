@@ -7,21 +7,53 @@
 
 namespace Very\Tests\Support;
 
+use Aliyun\ACM\RequestException;
 use PHPUnit\Framework\TestCase;
 use Aliyun\ACM\Client;
 
 class ClientTest extends TestCase
 {
-    public function testNewClient()
+
+    /**
+     * @return \Aliyun\ACM\Client
+     */
+    private function getClient()
     {
-        $client = new Client([
-            "accessKey" => "********",
-            "secretKey" => "********",
+        return new Client([
+            "accessKey" => getenv("AccessKey"),
+            "secretKey" => getenv("SecretKey"),
             "endPoint"  => "acm.aliyun.com",
-            "nameSpace" => "test",
+            "nameSpace" => getenv("NameSpace"),
             "timeOut"   => 30,
         ]);
+    }
 
-        $this->assertTrue(count($client->getServers()) >0);
+    public function testNewClient()
+    {
+        $client = $this->getClient();
+        $this->assertTrue(count($client->getServers()) > 0);
+    }
+
+    private function withTest($dateId, $fn)
+    {
+        $client = $this->getClient();
+        $ret    = $client->publish($dateId, "test", "test");
+        $fn($client);
+        $client->delete($dateId, "test");
+    }
+
+    public function testGetConfig()
+    {
+        $this->withTest("test1",function ($client) {
+            $ret = $client->getConfig("test1", "test");
+            $this->assertEquals($ret, "test");
+        });
+    }
+
+    public function testSubscribe()
+    {
+        $this->withTest("test2",function ($client) {
+            $client->subscribe("test2", "test");
+        });
     }
 }
