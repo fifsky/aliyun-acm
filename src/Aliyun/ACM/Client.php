@@ -70,6 +70,7 @@ class Client
 
     private function getSign($params)
     {
+        $params = array_filter($params);
         $signStr = implode("+", $params);
         return base64_encode(hash_hmac('sha1', $signStr, $this->secretKey, true));
     }
