@@ -124,7 +124,11 @@ class Client
             throw new RequestException("response error:".$ret->getBody());
         }
 
-        return Str::toUTF8($ret->getBody());
+        if (mb_detect_encoding($ret->getBody(), ['ASCII','UTF-8','GB2312','GBK','BIG5']) !== 'UTF-8') {
+            return Str::toUTF8($ret->getBody());
+        }
+
+        return $ret->getBody();
     }
 
     /**
