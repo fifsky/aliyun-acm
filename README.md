@@ -1,22 +1,22 @@
 # Aliyun-ACM SDK for PHP
 
-<a href="https://travis-ci.org/verystar/aliyun-acm"><img src="https://api.travis-ci.org/verystar/aliyun-acm.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/verystar/aliyun-acm"><img src="https://poser.pugx.org/verystar/aliyun-acm/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/verystar/aliyun-acm"><img src="https://poser.pugx.org/verystar/aliyun-acm/v/stable.svg" alt="Latest Stable Version"></a>
+<a href="https://travis-ci.org/fifsky/aliyun-acm"><img src="https://api.travis-ci.org/fifsky/aliyun-acm.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/fifsky/aliyun-acm"><img src="https://poser.pugx.org/fifsky/aliyun-acm/d/total.svg" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/fifsky/aliyun-acm"><img src="https://poser.pugx.org/fifsky/aliyun-acm/v/stable.svg" alt="Latest Stable Version"></a>
 
 Aliyun ACM SDK for PHP, Multi-ip polling and local file cache is supported
 
 ## Install
 
 ```
-composer require verystar/aliyun-acm
+composer require fifsky/aliyun-acm
 ```
 
 Or add a dependency to the composer.json
 
 ```
 "require": {
-    "verystar/aliyun-acm": "1.0.*"
+    "fifsky/aliyun-acm": "1.0.*"
 }
 ```
 
